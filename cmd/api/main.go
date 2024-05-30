@@ -8,18 +8,8 @@ import (
 	"github.com/pinhob/ramengo-api/broth"
 	"github.com/pinhob/ramengo-api/dish"
 	"github.com/pinhob/ramengo-api/protein"
+	"github.com/pinhob/ramengo-api/types"
 )
-
-type OrderRequest struct {
-	BrothId   string
-	ProteinId string
-}
-
-type OrderRespone struct {
-	ID          int    `json:"id"`
-	Description string `json:"description"`
-	Image       string `json:"image"`
-}
 
 func main() {
 	http.HandleFunc("GET /broths", handleBroths)
@@ -48,7 +38,7 @@ func handleProteins(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleOrders(w http.ResponseWriter, r *http.Request) {
-	var ids OrderRequest
+	var ids types.OrderRequest
 
 	err := json.NewDecoder(r.Body).Decode(&ids)
 	if err != nil {
@@ -78,7 +68,7 @@ func handleOrders(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	order := OrderRespone{
+	order := types.OrderRespone{
 		ID:          123,
 		Description: dish.Name,
 		Image:       dish.Image,
