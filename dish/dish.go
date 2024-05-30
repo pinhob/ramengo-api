@@ -22,12 +22,12 @@ var DishTable = []Dish{
 	{ID: 6, Name: "Miso and Kaarague Ramen", Image: "#", BrothId: 3, ProteinId: 3},
 }
 
-func GetDish(brothId, proteinId int) (error, Dish) {
+func GetDish(brothId, proteinId int) (Dish, error) {
 	for _, d := range DishTable {
 		if d.BrothId == brothId && d.ProteinId == proteinId {
-			return nil, d
+			return d, nil
 		}
 	}
 
-	return errors.New("we don't have any dish with the given broth and protein ids"), Dish{}
+	return Dish{}, errors.New("we don't have any dish with the given broth and protein ids")
 }

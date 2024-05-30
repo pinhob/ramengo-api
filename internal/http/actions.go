@@ -52,7 +52,7 @@ func HandleOrders(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err, dish := dish.GetDish(brothId, proteinId)
+	dish, err := dish.GetDish(brothId, proteinId)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(err)
