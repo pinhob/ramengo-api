@@ -6,7 +6,7 @@ type OrderRequest struct {
 }
 
 type OrderRespone struct {
-	ID          int    `json:"id"`
+	ID          string `json:"id"`
 	Description string `json:"description"`
 	Image       string `json:"image"`
 }

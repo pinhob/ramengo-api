@@ -1,7 +1,10 @@
 package http
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
+	"io"
 	"net/http"
 	"strconv"
 
@@ -59,8 +62,42 @@ func HandleOrders(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	req, err := http.NewRequest("POST", "https://api.tech.redventures.com.br/orders/generate-id", &bytes.Buffer{})
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(err)
+		return
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("x-api-key", "ZtVdh8XQ2U8pWI2gmZ7f796Vh8GllXoN7mr0djNf")
+
+	client := &http.Client{}
+	res, errRes := client.Do(req)
+	if errRes != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(err)
+		return
+	}
+	defer res.Body.Close()
+	resBody, err := io.ReadAll(res.Body)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(err)
+		return
+	}
+
+	var resJson map[string]interface{}
+	errUnmarshall := json.Unmarshal(resBody, &resJson)
+	if errUnmarshall != nil {
+
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(fmt.Sprintf("erro aqui %v %v", err, string(resBody)))
+		return
+	}
+
 	order := types.OrderRespone{
-		ID:          123,
+		ID:          resJson["orderId"].(string),
 		Description: dish.Name,
 		Image:       dish.Image,
 	}
