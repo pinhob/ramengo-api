@@ -15,7 +15,6 @@ import (
 )
 
 func HandleRoot(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("RamenGo API"))
 }
@@ -23,8 +22,6 @@ func HandleRoot(w http.ResponseWriter, r *http.Request) {
 var brothService broth.Service
 
 func HandleBroths(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
 	broths, err := brothService.GetAll()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -38,17 +35,12 @@ func HandleBroths(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleProteins(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(protein.ProteinsTable)
 }
 
 func HandleOrders(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
 	var ids types.OrderRequest
 
 	err := json.NewDecoder(r.Body).Decode(&ids)
