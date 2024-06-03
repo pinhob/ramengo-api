@@ -21,6 +21,7 @@ func HandleRoot(w http.ResponseWriter, r *http.Request) {
 
 var brothService broth.Service
 var proteinService protein.Service
+var dishService dish.Service
 
 func ConfigureBrothsService() {
 	brothService = broth.Service{
@@ -34,6 +35,14 @@ func ConfigureProteinsService() {
 	proteinService = protein.Service{
 		Repository: &protein.RepositoryData{
 			MockData: protein.MockDBProtein,
+		},
+	}
+}
+
+func ConfigureDishService() {
+	dishService = dish.Service{
+		Repository: &dish.RepositoryData{
+			MockData: dish.MockDBDishes,
 		},
 	}
 }
@@ -88,7 +97,7 @@ func HandleOrders(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dish, err := dish.GetDish(brothId, proteinId)
+	dish, err := dishService.GetDishByCondiments(brothId, proteinId)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(err)

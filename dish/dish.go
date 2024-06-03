@@ -1,7 +1,5 @@
 package dish
 
-import "errors"
-
 type Dish struct {
 	ID        int
 	Name      string
@@ -10,7 +8,7 @@ type Dish struct {
 	ProteinId int
 }
 
-var DishTable = []Dish{
+var MockDBDishes = []Dish{
 	{ID: 7, Name: "Salt and Chasu Ramen", Image: "https://tech.redventures.com.br/icons/ramen/ramenChasu.png", BrothId: 1, ProteinId: 1},
 	{ID: 8, Name: "Salt and Yasai Vegetable Ramen", Image: "https://tech.redventures.com.br/icons/ramen/ramenYasai%20Vegetarian.png", BrothId: 1, ProteinId: 2},
 	{ID: 9, Name: "Salt and Karaague Ramen", Image: "https://tech.redventures.com.br/icons/ramen/ramenKaraague.png", BrothId: 1, ProteinId: 3},
@@ -20,14 +18,4 @@ var DishTable = []Dish{
 	{ID: 4, Name: "Miso and Chasu Ramen", Image: "https://tech.redventures.com.br/icons/ramen/ramenChasu.png", BrothId: 3, ProteinId: 1},
 	{ID: 5, Name: "Miso and Yasai Vegetable Ramen", Image: "https://tech.redventures.com.br/icons/ramen/ramenYasai%20Vegetarian.png", BrothId: 3, ProteinId: 2},
 	{ID: 6, Name: "Miso and Kaarague Ramen", Image: "https://tech.redventures.com.br/icons/ramen/ramenKaraague.png", BrothId: 3, ProteinId: 3},
-}
-
-func GetDish(brothId, proteinId int) (Dish, error) {
-	for _, d := range DishTable {
-		if d.BrothId == brothId && d.ProteinId == proteinId {
-			return d, nil
-		}
-	}
-
-	return Dish{}, errors.New("we don't have any dish with the given broth and protein ids")
 }
