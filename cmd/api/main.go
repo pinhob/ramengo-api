@@ -11,7 +11,20 @@ func main() {
 	router := http.NewServeMux()
 
 	ihttp.SetRoutes(router)
-	log.Fatal(http.ListenAndServe(":8080", CorsMiddleware(router)))
+	log.Fatal(http.ListenAndServe(":8080", ValidateHeaderMiddleware(router)))
+}
+
+func ValidateHeaderMiddleware(next http.Handler) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		apiKey := r.Header.Get("x-api-key")
+
+		if apiKey == "" {
+			http.Error(w, "x-api-key header missing", http.StatusForbidden)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	}
 }
 
 func CorsMiddleware(next http.Handler) http.HandlerFunc {
