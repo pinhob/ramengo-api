@@ -9,9 +9,13 @@ import (
 
 func main() {
 	router := http.NewServeMux()
+	middlewares := MiddlewareChain(
+		CorsMiddleware,
+		ValidateHeaderMiddleware,
+	)
 
 	ihttp.SetRoutes(router)
-	log.Fatal(http.ListenAndServe(":8080", ValidateHeaderMiddleware(router)))
+	log.Fatal(http.ListenAndServe(":8080", middlewares(router)))
 }
 
 func ValidateHeaderMiddleware(next http.Handler) http.HandlerFunc {
@@ -40,5 +44,17 @@ func CorsMiddleware(next http.Handler) http.HandlerFunc {
 		}
 
 		next.ServeHTTP(w, r)
+	}
+}
+
+type Middleware func(http.Handler) http.HandlerFunc
+
+func MiddlewareChain(middlewares ...Middleware) Middleware {
+	return func(next http.Handler) http.HandlerFunc {
+		for i := len(middlewares) - 1; i >= 0; i-- {
+			next = middlewares[i](next)
+		}
+
+		return next.ServeHTTP
 	}
 }
