@@ -10,6 +10,7 @@ import (
 func main() {
 	router := http.NewServeMux()
 	middlewares := MiddlewareChain(
+		RequestLoggerMiddleware,
 		CorsMiddleware,
 		ValidateHeaderMiddleware,
 	)
@@ -43,6 +44,13 @@ func CorsMiddleware(next http.Handler) http.HandlerFunc {
 			return
 		}
 
+		next.ServeHTTP(w, r)
+	}
+}
+
+func RequestLoggerMiddleware(next http.Handler) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("method %s, path: %s", r.Method, r.URL.Path)
 		next.ServeHTTP(w, r)
 	}
 }
