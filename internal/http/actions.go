@@ -96,7 +96,7 @@ func HandleOrders(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var resJson map[string]interface{}
+	var resJson map[string]string
 	errUnmarshall := json.Unmarshal(resBody, &resJson)
 	if errUnmarshall != nil {
 
@@ -106,7 +106,7 @@ func HandleOrders(w http.ResponseWriter, r *http.Request) {
 	}
 
 	order := types.OrderRespone{
-		ID:          resJson["orderId"].(string),
+		ID:          resJson["orderId"],
 		Description: dish.Name,
 		Image:       dish.Image,
 	}
