@@ -20,11 +20,20 @@ func HandleRoot(w http.ResponseWriter, r *http.Request) {
 }
 
 var brothService broth.Service
+var proteinService protein.Service
 
 func ConfigureBrothsService() {
 	brothService = broth.Service{
 		Repository: &broth.RepositoryData{
 			MockData: broth.MockDBTable,
+		},
+	}
+}
+
+func ConfigureProteinsService() {
+	proteinService = protein.Service{
+		Repository: &protein.RepositoryData{
+			MockData: protein.MockDBProtein,
 		},
 	}
 }
@@ -43,9 +52,16 @@ func HandleBroths(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleProteins(w http.ResponseWriter, r *http.Request) {
+	proteins, err := proteinService.GetAll()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(fmt.Sprintf("error: %s", err))
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(protein.ProteinsTable)
+	json.NewEncoder(w).Encode(proteins)
 }
 
 func HandleOrders(w http.ResponseWriter, r *http.Request) {
