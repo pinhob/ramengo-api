@@ -21,6 +21,11 @@ func CorsMiddleware(next http.Handler) http.HandlerFunc {
 		w.Header().Add("Access-Control-Allow-Headers", "content-type, x-api-key")
 		w.Header().Add("Access-Control-Max-Age", "86400")
 
+		if r.Method == "OPTIONS" {
+			http.Error(w, "No Content", http.StatusNoContent)
+			return
+		}
+
 		next.ServeHTTP(w, r)
 	}
 }
