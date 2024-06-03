@@ -15,6 +15,7 @@ func main() {
 		ValidateHeaderMiddleware,
 	)
 
+	ihttp.ConfigureBrothsService()
 	ihttp.SetRoutes(router)
 	log.Fatal(http.ListenAndServe(":8080", middlewares(router)))
 }

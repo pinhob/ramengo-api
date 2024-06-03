@@ -7,7 +7,7 @@ type Service struct {
 }
 
 func (s Service) GetAll() ([]Broth, error) {
-	broths, err := GetAll()
+	broths, err := s.Repository.GetAll()
 	if err != nil {
 		return nil, errors.New("cannot get broths from repository")
 	}

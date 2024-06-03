@@ -21,6 +21,14 @@ func HandleRoot(w http.ResponseWriter, r *http.Request) {
 
 var brothService broth.Service
 
+func ConfigureBrothsService() {
+	brothService = broth.Service{
+		Repository: &broth.RepositoryData{
+			MockData: broth.MockDBTable,
+		},
+	}
+}
+
 func HandleBroths(w http.ResponseWriter, r *http.Request) {
 	broths, err := brothService.GetAll()
 	if err != nil {
