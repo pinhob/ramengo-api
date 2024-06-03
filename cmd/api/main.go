@@ -17,6 +17,7 @@ func main() {
 
 	ihttp.ConfigureBrothsService()
 	ihttp.ConfigureProteinsService()
+	ihttp.ConfigureDishService()
 	ihttp.SetRoutes(router)
 	log.Fatal(http.ListenAndServe(":8080", middlewares(router)))
 }

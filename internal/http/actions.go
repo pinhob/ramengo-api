@@ -47,6 +47,12 @@ func ConfigureDishService() {
 	}
 }
 
+func ConfigureServices() {
+	ConfigureBrothsService()
+	ConfigureProteinsService()
+	ConfigureDishService()
+}
+
 func HandleBroths(w http.ResponseWriter, r *http.Request) {
 	broths, err := brothService.GetAll()
 	if err != nil {
