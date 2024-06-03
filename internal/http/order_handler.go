@@ -8,36 +8,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/pinhob/ramengo-api/broth"
 	"github.com/pinhob/ramengo-api/dish"
-	"github.com/pinhob/ramengo-api/protein"
 	"github.com/pinhob/ramengo-api/types"
 )
 
-func HandleRoot(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("RamenGo API"))
-}
-
-var brothService broth.Service
-var proteinService protein.Service
 var dishService dish.Service
-
-func ConfigureBrothsService() {
-	brothService = broth.Service{
-		Repository: &broth.RepositoryData{
-			MockData: broth.MockDBTable,
-		},
-	}
-}
-
-func ConfigureProteinsService() {
-	proteinService = protein.Service{
-		Repository: &protein.RepositoryData{
-			MockData: protein.MockDBProtein,
-		},
-	}
-}
 
 func ConfigureDishService() {
 	dishService = dish.Service{
@@ -45,38 +20,6 @@ func ConfigureDishService() {
 			MockData: dish.MockDBDishes,
 		},
 	}
-}
-
-func ConfigureServices() {
-	ConfigureBrothsService()
-	ConfigureProteinsService()
-	ConfigureDishService()
-}
-
-func HandleBroths(w http.ResponseWriter, r *http.Request) {
-	broths, err := brothService.GetAll()
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(fmt.Sprintf("error: %s", err))
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(broths)
-}
-
-func HandleProteins(w http.ResponseWriter, r *http.Request) {
-	proteins, err := proteinService.GetAll()
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(fmt.Sprintf("error: %s", err))
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(proteins)
 }
 
 func HandleOrders(w http.ResponseWriter, r *http.Request) {
