@@ -13,6 +13,7 @@ Consulte a documentação abaixo para mais informações sobre o projeto.
   - [Manualmente](#manualmente)
 - [Rotas](#rotas)
 - [Estrutura do projeto](#estrutura-do-projeto)
+- [Próximos passos](#próximos-passos)
 
 ## Requisitos
 Para rodar o projeto você precisa ter o `Go 1.22` instalado em sua máquina.
@@ -48,11 +49,11 @@ go build .
 A API possui três rotas, sendo: 
 * **`GET /broths`**
 * **`GET /proteins`**
-* **`POST /orders`**, com o payload: 
+* **`POST /orders`**, que espera o payload: 
 ```
 {
-  "brothId": "1",
-  "proteinId": "1",
+  "brothId": "idNumber",
+  "proteinId": "idNumber",
 }
 ```
 
@@ -104,3 +105,4 @@ O pacote `types` concentra alguns tipos que usamos por toda nossa aplicação.
 
 O ponto de entrada de nossa api está no pacote `main`, dentro de `/cmd/api`.
 
+## Próximos passos
