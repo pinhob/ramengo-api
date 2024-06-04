@@ -10,6 +10,10 @@ Consulte a documentação abaixo para mais informações sobre o projeto.
 
 - [Rodando o projeto](#rodando-o-projeto)
 
+  - [Com Docker](#com-docker)
+  - [Com Make](#com-make)
+  - [Manualmente](#manualmente)
+
 
 ---
 ## Requisitos
