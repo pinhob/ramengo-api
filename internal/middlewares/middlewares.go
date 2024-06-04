@@ -1,8 +1,15 @@
 package middlewares
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
+
+	"github.com/pinhob/ramengo-api/types"
+)
+
+const (
+	errMsgApiKey = "x-api-key header missing"
 )
 
 func ValidateHeaderMiddleware(next http.Handler) http.HandlerFunc {
@@ -10,7 +17,10 @@ func ValidateHeaderMiddleware(next http.Handler) http.HandlerFunc {
 		apiKey := r.Header.Get("x-api-key")
 
 		if apiKey == "" {
-			http.Error(w, "x-api-key header missing", http.StatusForbidden)
+			errRes, _ := json.Marshal(types.ErrorObject{Error: errMsgApiKey})
+			w.WriteHeader(http.StatusForbidden)
+			w.Write(errRes)
+			// http.Error(w, , http.StatusForbidden)
 			return
 		}
 
