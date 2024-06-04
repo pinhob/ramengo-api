@@ -10,3 +10,7 @@ type OrderRespone struct {
 	Description string `json:"description"`
 	Image       string `json:"image"`
 }
+
+type ErrorObject struct {
+	Error string `json:"error"`
+}
