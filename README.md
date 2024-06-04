@@ -12,7 +12,7 @@ Consulte a documentação abaixo para mais informações sobre o projeto.
   - [Com Make](#com-make)
   - [Manualmente](#manualmente)
 - [Rotas](#rotas)
-- [Estrutura do projet](#estrutura-do-projeto)
+- [Estrutura do projeto](#estrutura-do-projeto)
 
 ## Requisitos
 Para rodar o projeto você precisa ter o `Go 1.22` instalado em sua máquina.
