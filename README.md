@@ -2,11 +2,13 @@
 
 **Essa é a API da aplicação [ramenGo](http://34.207.182.179/). Você pode acessar o repositório do frontend [aqui](https://github.com/pinhob/ramengo-front).**
 
----
-## Conteúdo
-[Requisitos](#requisitos)
+Consulte a documentação abaixo para mais informações sobre o projeto.
 
-[Rodando o projeto](#rodando-o-projeto)
+---
+## Sumário
+- [Requisitos](#requisitos)
+
+- [Rodando o projeto](#rodando-o-projeto)
 
 
 ---
@@ -15,6 +17,9 @@ Para rodar o projeto você precisa ter o `Go 1.22` instalado em sua máquina.
 
 ---
 ## Rodando o projeto
+
+Execute o projeto com alguma das opções abaixo para acessá-lo via `http://localhost:8080/`
+
 ### Com Docker
 Caso você tenha o docker instalado, execute na raiz do projeto, via terminal, os seguintes comandos: 
 ```
