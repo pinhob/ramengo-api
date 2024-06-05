@@ -2,6 +2,10 @@
 
 **Essa é a API da aplicação [ramenGo](http://34.207.182.179/). Você pode acessar o repositório do frontend [aqui](https://github.com/pinhob/ramengo-front).**
 
+A API está hospedada em uma instância EC2 e pode ser acessada pelo seguinte domínio: 
+
+**[API](http://34.207.182.179/)**
+
 Consulte a documentação abaixo para mais informações sobre o projeto.
 
 ---
@@ -11,6 +15,7 @@ Consulte a documentação abaixo para mais informações sobre o projeto.
   - [Com Docker](#com-docker)
   - [Com Make](#com-make)
   - [Manualmente](#manualmente)
+- [Rodando a suíte de testes](#rodando-a-suíte-de-testes)
 - [Rotas](#rotas)
 - [Estrutura do projeto](#estrutura-do-projeto)
 - [Próximos passos](#próximos-passos)
@@ -45,6 +50,13 @@ cd cmd/api
 go build .
 ./api
 ```
+## Rodando a suíte de testes
+Você pode executar os testes unitários com o comando:
+```
+make tests
+```
+Caso não tenha o Make instalado, pode executar manualmente executando o comando `go test -v ./...`.
+
 ## Rotas
 A API possui três rotas, sendo: 
 * **`GET /broths`**
@@ -106,3 +118,7 @@ O pacote `types` concentra alguns tipos que usamos por toda nossa aplicação.
 O ponto de entrada de nossa api está no pacote `main`, dentro de `/cmd/api`.
 
 ## Próximos passos
+* Criar testes de integração e aumentar a cobertura de testes unitário testando também os pacotes `internal_http` e `middlewares`. 
+* Integrar a um banco de dados. 
+* Criar variáveis de ambiente.
+* Atribuir um domínio para a aplicação na instância EC2.
