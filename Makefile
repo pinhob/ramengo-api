@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := run
 
-.PHONY: build run
+.PHONY: build run tests image container start
 
 build: 
 	go build -o=bin/api cmd/api/main.go
