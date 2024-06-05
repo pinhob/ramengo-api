@@ -7,3 +7,6 @@ build:
 
 run: build
 	./bin/api
+
+tests: 
+	go test -v ./...
