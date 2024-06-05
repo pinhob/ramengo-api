@@ -12,10 +12,10 @@ tests:
 	go test -v ./...
 
 image:
-	docker build --tag ramengo-api-img .
+	sudo docker build --tag ramengo-api-img .
 
 container:
-	docker run -p 8080:8080 --name ramengo-api ramengo-api-img
+	sudo docker run -p 8080:8080 --name ramengo-api ramengo-api-img
 
 start: 
-	docker start ramengo-api
+	sudo docker start ramengo-api

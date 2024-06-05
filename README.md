@@ -124,3 +124,4 @@ O ponto de entrada de nossa api está no pacote `main`, dentro de `/cmd/api`.
 * Integrar a um banco de dados. 
 * Criar variáveis de ambiente.
 * Atribuir um domínio para a aplicação na instância EC2.
+* Criar as funções de exemplo para gerar documentação usando `go doc`.
