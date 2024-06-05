@@ -30,9 +30,11 @@ Execute o projeto com alguma das opções abaixo para acessá-lo via `http://loc
 ### Com Docker
 Caso você tenha o docker instalado, execute na raiz do projeto, via terminal, os seguintes comandos: 
 ```
-sudo docker build -t ramengo-api-img .
-docker run -d -p 8080:8080 --name ramengo-api ramengo-api-img
+sudo docker build -t ramengo-api-img . // ou se tiver o make instalado: make image
+docker run -d -p 8080:8080 --name ramengo-api ramengo-api-img // ou: make container
 ```
+Caso tenha o make e já tenha criado o container, basta executar `make start` para iniciar o container. 
+
 ### Com Make
 Caso você não tenha o Docker instalado mas tenha o Make, execute:
 ```
