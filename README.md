@@ -1,10 +1,10 @@
 !["ramenGo logo"](./docs/assets/ramengo_header_azul_readme.png)
 
-**Essa é a API da aplicação [ramenGo](http://34.207.182.179/). Você pode acessar o repositório do frontend [aqui](https://github.com/pinhob/ramengo-front).**
+**Essa é a API da aplicação [ramenGo](http://54.234.245.214/). Você pode acessar o repositório do frontend [aqui](https://github.com/pinhob/ramengo-front).**
 
 A API está hospedada em uma instância EC2 e pode ser acessada pelo seguinte domínio: 
 
-**[API](http://34.207.182.179/)**
+**[API](http://54.234.245.214:8080/)**
 
 Consulte a documentação abaixo para mais informações sobre o projeto.
 
